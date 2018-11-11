@@ -29,7 +29,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    WebView webViewElectric;
     Button buttnUpload;
     Button btnSend;
     Bitmap bitmap;
@@ -45,17 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        webViewElectric = findViewById(R.id.webViewElectric);
         buttnUpload = findViewById(R.id.buttonUpload);
         imageViewUpload = findViewById(R.id.imageViewUpload);
         btnSend = findViewById(R.id.btnSend);
         spinner = (ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
 
-        WebSettings webSettings = webViewElectric.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        webViewElectric.loadUrl("https://www.continentalpowercorp.com/free-electric-bill-analysis/");
         buttnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
                         String res = response.body();
 
                         StringBuilder sbBuilder = new StringBuilder();
-                        sbBuilder.append("Your Average Consumption: ");
+                        sbBuilder.append("Your Average Consumption is ");
                         sbBuilder.append(res);
+                        sbBuilder.append("\n");
+                        sbBuilder.append("You are Eligible to grant GEOP! ");
                         sbBuilder.append("\n");
                         sbBuilder.append("The Admin will Contact you right away");
 
@@ -91,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                         dialog.dismiss();
                                     }
                                 });
+                        builder.setTitle("Congratulations");
                         builder.show();
                     }
 
