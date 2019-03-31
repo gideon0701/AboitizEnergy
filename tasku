@@ -1,0 +1,14 @@
+ private static bool isStringFullWidth()
+        {
+            string s = "ｱﾀﾞﾀﾞ";
+            Encoding jp = Encoding.GetEncoding("Shift_JIS");
+            foreach (char w in s.ToCharArray())
+            {
+                if (jp.GetByteCount(w.ToString()) < 2)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
