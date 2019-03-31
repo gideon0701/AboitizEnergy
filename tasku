@@ -1,4 +1,30 @@
- private static bool isStringFullWidth()
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string halfwidth = "ｷﾞﾃﾞｵﾝ";
+            string fullwidth = "ギデオン";
+
+            Encoding jp = Encoding.GetEncoding("Shift_JIS");
+            Console.WriteLine("HALFWIDTH: ");
+            Console.WriteLine(jp.GetByteCount("ﾞ"));
+            Console.WriteLine("FULLWIDTH: ");
+            Console.WriteLine(jp.GetByteCount("a"));
+
+            Console.WriteLine("IS FULLWIDTH: ");
+            Console.WriteLine(isStringFullWidth());
+            Console.ReadKey();
+        }
+
+        private static bool isStringFullWidth()
         {
             string s = "ｱﾀﾞﾀﾞ";
             Encoding jp = Encoding.GetEncoding("Shift_JIS");
@@ -12,3 +38,4 @@
 
             return true;
         }
+    }
